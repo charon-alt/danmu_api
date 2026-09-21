@@ -846,7 +846,7 @@ export default class BilibiliSource extends BaseSource {
             const data = typeof res.data === "string" ? JSON.parse(res.data) : res.data;
             if (data.code === 0 && data.result) {
                const ep = data.result.episodes.find(e => e.id == epid);
-               if (ep) { cid = ep.cid; duration = ep.duration / 1000; title = ep.share_copy; success = true; }
+               if (ep) { cid = ep.cid; aid = ep.aid; duration = ep.duration / 1000; title = ep.share_copy; success = true; }
             }
         }
 
@@ -1084,6 +1084,7 @@ export default class BilibiliSource extends BaseSource {
       const response = await httpGet(rawUrl, {
         headers: {
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+          "Referer": "https://www.bilibili.com/",
           "Cookie": globals.bilibliCookie
         },
         base64Data: true,
